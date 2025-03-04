@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  node: circleci/node@7.1.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/jobs-steps/#jobs-overview & https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -18,6 +21,8 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run:
           name: "Run server"
           command: "npm run start"
