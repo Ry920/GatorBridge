@@ -25,8 +25,11 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run:
-          name: "Run server"
-          command: "npm run start"
+          name: "Build client dependencies"
+          command: "cd client && npm install"
+      - run:
+          name: "Check server files"
+          command: "npm run check"
       - run:
           name: "Build client"
           command: "cd client && npm run build"
