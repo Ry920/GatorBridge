@@ -13,6 +13,11 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+app.post("/login", (req, res) => {
+  console.log("Received form!");
+  console.log(req.body);
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
