@@ -22,6 +22,9 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
       - node/install-packages:
           pkg-manager: npm
       - run:
