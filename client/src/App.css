@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -12,17 +13,173 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-header {
-  background-color: #282c34;
+.App-background {
+  background-image: url('Backdrop.png');
+  background-size:cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
+.App-white-box-overlay {
+  background-color: white;
+  height: 791px;
+  width: 732px;
+  left: 330px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.App-SignUp-Info-Container{
+  width: 456px;
+  height: 270px;
+  gap: 16px;
+}
+.App-SignUp-GetName-Container{
+  display: flex;
+  width: 456px;
+  height: 87px;
+  gap: 16px;
+}
+.App-FirstName-Title{
+  display:flex;
+  width: 220px;
+  height: 27px;
+  color: black;
+  font-size: 16px;
+}
+.App-LastName-Title{
+  display:flex;
+  width: 220px;
+  height: 27px;
+  color: black;
+  font-size: 16px;
+}
+.App-FirstName-Container{
+  width: 220px;
+  height: 87px;
+  gap: 4px;
+}
+.App-LastName-Container{
+  width: 220px;
+  height: 87px;
+  gap: 4px;
+}
+.App-FirstName-TextField{
+  width: 220px;
+  height: 56px;
+  border-radius: 12px;
+  font-size: 20px;
+  text-indent: 10px;
+  border: 1px solid #66666659;
+}
+.App-LastName-TextField{
+  width: 220px;
+  height: 56px;
+  border-radius: 12px;
+  font-size: 20px;
+  text-indent: 10px;
+  border: 1px solid #66666659;
+}
+.App-SignUp-GetAddress-Container{
+  position:relative;
+  top: 16px;
+  width: 456px;
+  height: 87px;
+  gap: 4px;
+}
+.App-GetAddress-Title{
+  display:flex;
+  width: 456px;
+  height:27px;
+  font-size: 16px;
+  color: black;
+}
+.App-GetAddress-TextField{
+  width: 454px;
+  height: 60px;
+  font-size: 20px;
+  text-indent: 10px;
+  border-radius: 12px;
+  border: 1px solid #66666659;
+}
+.App-SignUp-Button-Container{
+  position: relative;
+  top: 32px;
+  width: 454px;
+  height: 64px;
+  border-radius: 40px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 22px;
+  color: white;
+  border: 1px solid #66666659;
+  background-color: rgb(167, 167, 167)
+}
+.App-SignUp-Button-Container:hover{
+  background-color: rgb(65, 62, 62);
+  color: white
+}
+.App-Signup-Login-Container{
+  width: 604px;
+  height: 691px;
+  left: 64px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+.App-Signup-Login-Container2{
+  width: 456px;
+  height: 595px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.App-Split-Button-Container{
+  width: 604px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  background-color: #979595;
+}
+.App-Split-Button{
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+ }
+ .App-Split-Button.left {
+  border-right: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+ }
+ 
+ .App-Split-Button.right {
+  border-radius: 0 5px 5px 0;
+ }
+ 
+ .App-Split-Button.left:hover{
+  background-color: rgb(65, 62, 62);
+  color: white
+ }
+ .App-Split-Button.right:hover{
+  background-color: rgb(65, 62, 62);
+  color: white;
+ }
 
 .App-link {
   color: #61dafb;
