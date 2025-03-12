@@ -42,10 +42,12 @@
   gap: 16px;
 }
 .App-SignUp-GetName-Container{
-  display: flex;
+  display:flex;
   width: 456px;
   height: 87px;
   gap: 16px;
+  color:black;
+  font-size: 16px;
 }
 .App-FirstName-Title{
   display:flex;
@@ -94,6 +96,40 @@
   height: 87px;
   gap: 4px;
 }
+.App-SignUp-GetPassword-Container{
+  position:relative;
+  top: 32px;
+  width: 456px;
+  height: 87px;
+  gap: 4px;
+}
+.App-SignIn-GetAddress-Container{
+  width:456px;
+  height: 87px;
+  gap: 16px;
+}
+.App-SignIn-GetPassword-Container{
+  width:456px;
+  height:87px;
+  gap: 4px;
+  position:relative;
+  top: 16px;
+}
+.App-GetPassword-Title{
+  display:flex;
+  width:456px;
+  height:27px;
+  font-size:16px;
+  color:black;
+}
+.App-GetPassword-TextField{
+  width: 454px;
+  height: 60px;
+  font-size: 20px;
+  text-indent: 10px;
+  border-radius: 12px;
+  border: 1px solid #66666659;
+}
 .App-GetAddress-Title{
   display:flex;
   width: 456px;
@@ -111,7 +147,7 @@
 }
 .App-SignUp-Button-Container{
   position: relative;
-  top: 32px;
+  top: 48px;
   width: 454px;
   height: 64px;
   border-radius: 40px;
@@ -124,6 +160,24 @@
   background-color: rgb(167, 167, 167)
 }
 .App-SignUp-Button-Container:hover{
+  background-color: rgb(65, 62, 62);
+  color: white
+}
+.App-LogIn-Button-Container{
+  position: relative;
+  top: 32px;
+  width: 454px;
+  height: 64px;
+  border-radius: 40px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 22px;
+  color: white;
+  border: 1px solid #66666659;
+  background-color: rgb(167, 167, 167)
+}
+.App-LogIn-Button-Container:hover{
   background-color: rgb(65, 62, 62);
   color: white
 }

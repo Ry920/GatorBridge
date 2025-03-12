@@ -11,7 +11,7 @@ function App() {
   const[userFirstName, setUserFirstName] = React.useState("");
   const[userLasttName, setUserLastName] = React.useState("");
   const[userEmail, setUserEmail] = React.useState("");
-
+  const[userPassword, setuserPassword] = React.useState("");
   React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
@@ -51,7 +51,17 @@ function App() {
     </label>
     );
   }
-
+  function GetPassword(){
+    const handleInput = (event) => {
+      setuserPassword(event.target.value);
+    }
+    return(
+      <label>
+      <input type = "text" 
+      className = "App-GetPassword-TextField" />
+    </label>
+    );
+  }
   const handleLeftClick = () => {
         setIsClickedLeft(true);
         setIsClickedRight(false);
@@ -89,6 +99,12 @@ function App() {
               </div>
               {GetEmail()}
             </div>
+            <div className = "App-SignUp-GetPassword-Container">
+              <div className = "App-GetPassword-Title">
+                Password
+              </div>
+              {GetPassword()}
+            </div>
             <div className = "App-SignUp-Button-Container">
               SIGN UP
             </div>
@@ -98,7 +114,28 @@ function App() {
   }
   function displayLogin(){
     return(
-        <p> Hello </p>
+        <div className = "App-Signup-Login-Container2">
+          <div className = "App-Signup-Text">
+            Log In
+          </div>
+          <div className = "App-SignUp-Info-Container">
+            <div className = "App-SignIn-GetAddress-Container">
+              <div className = "App-GetAddress-Title">
+              Email Address
+              </div>
+              {GetEmail()}
+            </div>
+            <div className = "App-SignIn-GetPassword-Container">
+              <div className = "App-GetPassword-Title">
+                Password
+              </div>
+              {GetPassword()}
+            </div>
+            <div className = "App-LogIn-Button-Container">
+              LOG IN
+            </div>
+          </div>
+        </div>
     );
   }
   return (
@@ -111,14 +148,14 @@ function App() {
               <button className= "App-Split-Button left"
                 onClick={handleLeftClick}
                 style={{
-                backgroundColor: isClickedLeft ? 'black' : 'lightgray',
-                color: isClickedLeft ? 'white' : 'black',}}>
+                backgroundColor: isClickedLeft ? 'black' : null,
+                color: isClickedLeft ? 'white' : null,}}>
                 Sign up
               </button>
               <button className="App-Split-Button right"
                 onClick={handleRightClick}
-                style={{backgroundColor: isClickedRight ? 'black' : 'lightgray',
-                color: isClickedRight ? 'white' : 'black',}}>
+                style={{backgroundColor: isClickedRight ? 'black' : null,
+                color: isClickedRight ? 'white' : null,}}>
                 Log in
               </button>
             </div>
