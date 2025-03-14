@@ -1,0 +1,27 @@
+.edit-popup{
+    position:absolute;
+    top: 0px;
+    left: 32%;
+    align-self: center;
+    align-items: center;
+    width: 50%;
+    height: 500px;
+    background-color: bisque;
+    display: flex;
+    border-radius: 50px;
+}
+.edit-inner{
+    position: relative;
+    padding: 32px;
+    width: 50%;
+    max-width: 640px;
+    background-color: aliceblue;
+}
+.close-button{
+    position: absolute;
+    border-style: hidden;
+    background-color: inherit;
+    top: 16px;
+    font-size: x-large;
+    right: 16px;
+}

@@ -1,0 +1,92 @@
+.Profile-background{
+    background-image: url("../a9c2638e9c681ae16c59abccdf38c41b.png");
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.Profile-page{
+    position: absolute;
+    top: 0px;
+}
+.Search{
+    width: 90%;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    height: 45px;
+    margin-top: 2px;
+    margin-left: 20px;
+    border-style: none;
+    font-size: larger;
+}
+.Rectangle{
+    margin-left: 50px;
+    height: 50px;
+    width: 50%;
+    background-color: white;
+    border-radius: 25px;
+    margin-bottom: 35px;
+    
+}
+.Profile-picture-square{
+    margin-left: 50px;
+    height: 270px;
+    width: 270px;
+    border-radius: 50px;
+    background-image: url("../a9c2638e9c681ae16c59abccdf38c41b.png");
+    background-position: right;
+    float: left;
+    align-content: space-evenly;
+}
+.Profile-picture-back{
+    height: 250px;
+    width: 250px;
+    margin:auto;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: pink;
+    border-width: 2px;
+}
+.Profile-picture img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+.Profile-info-square{
+    margin-left: 350px;
+    width: 1000px;
+    height: 270px;
+    background-color: white;
+    border-radius: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.Profile-user-edit{
+    width: 1000px;
+    height: 75px;
+    margin-left: 50px;
+    align-content: center;
+}
+.Profile-info-username{
+    font-size: large;
+    font-weight: bolder;
+    font-family: inherit;
+    float: left;
+}
+.Profile-edit-button{
+    width: 150px;
+    height: 40px;
+    margin-left: 600px;
+    margin-top: 22px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: pink;
+    font-size: large;
+    font-family: inherit;
+}
+.Profile-info-description{
+    margin-left: 50px;
+    margin-right: 50px;
+    font-family: inherit;
+    font-size: large;
+}
+
