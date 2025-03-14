@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
 import "./profile.css"
-import background from "../a9c2638e9c681ae16c59abccdf38c41b.png"
 import pfp from "../R.jpg"
 import Popup from "./editPopup.js"
 
