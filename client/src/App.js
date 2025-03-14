@@ -1,27 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 
 function App() {
 
-  const [data, setData] = React.useState(null);
+  //const [data, setData] = React.useState(null);
   const [isClickedLeft, setIsClickedLeft] = React.useState(true);
   const [isClickedRight, setIsClickedRight] = React.useState(false);
   const[userFirstName, setUserFirstName] = React.useState("");
   const[userLasttName, setUserLastName] = React.useState("");
   const[userEmail, setUserEmail] = React.useState("");
   const[userPassword, setuserPassword] = React.useState("");
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));
-  }, []);
+  }, []);*/
 
   function GetFirstName(){
-    const handleInput = (event) => {
-      setUserFirstName(event.target.value);
-    };
     return(
     <label>
       <input type = "text" 
