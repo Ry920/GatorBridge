@@ -20,7 +20,9 @@ function Profile(){
     return(
         <div className="Profile">
             <div className="Profile-background"></div>
-            <div className="Profile-page">
+            <div className="Profile-page"
+            style={{filter: toEdit ? "none":"inherit"}}
+            >
             <div className="Rectangle">
                 <form className="Search-bar">
                     <input type="text" name="Search-bar" placeholder="Search..." className="Search"></input>
@@ -30,7 +32,7 @@ function Profile(){
                 <div className="Profile-picture-square">
                     <div className="Profile-picture-back">
                         <div className="Profile-picture">
-                            <img src={pfp}></img>
+                            <img src={pfp} alt="profile-pic"></img>
                         </div>
                     </div>
                 </div>
@@ -53,8 +55,8 @@ function Profile(){
                     </div>
                 </div>
             </div>  
-            <Popup trigger={toEdit} setTrigger={settoEdit}></Popup>
             </div>
+            <Popup trigger={toEdit} setTrigger={settoEdit}></Popup>
         </div>
     );
 }

@@ -7,6 +7,7 @@
 }
 .Profile-page{
     position: absolute;
+    filter: blur(50px);
     top: 0px;
 }
 .Search{
