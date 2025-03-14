@@ -32,7 +32,7 @@ jobs:
           command: "npm run check"
       - run:
           name: "Build client"
-          command: "cd client && npm run build"
+          command: "cd client && CI=false && npm run build"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
