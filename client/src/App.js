@@ -1,5 +1,8 @@
 import React from "react";
 import "./App.css";
+import Profile from "./pages/profile.js"
+import Home from "./pages/home.js"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 function App() {
@@ -136,6 +139,13 @@ function App() {
   }
   return (
     <div className="App">
+    <Router>
+    <Routes>
+      <Route path="/login" element={<App/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/home" element={<Home/>}/>
+    </Routes>
+    </Router>
       <div className="App-background">
         <div className = "App-white-box-overlay">
           <div className = "App-Signup-Login-Container">
