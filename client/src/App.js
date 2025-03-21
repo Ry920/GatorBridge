@@ -140,11 +140,11 @@ function App() {
   return (
     <div className="App">
     <Router>
-    <Routes>
-      <Route path="/login" element={<App/>}/>
-      <Route path="/profile" element={<Profile/>}/>
-      <Route path="/home" element={<Home/>}/>
-    </Routes>
+      <Routes>
+        <Route element={<App/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/home" element={<Home/>}/>
+      </Routes>
     </Router>
       <div className="App-background">
         <div className = "App-white-box-overlay">
