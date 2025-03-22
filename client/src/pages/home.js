@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../logo.svg";
 import "./home.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 function Home() {
   const [data, setData] = React.useState(null);
