@@ -2,16 +2,16 @@ import React from "react";
 import "./App.css";
 import Profile from "./pages/profile.js"
 import Home from "./pages/home.js"
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
 
 
 function App() {
-
+  const navigate = useNavigate();
   //const [data, setData] = React.useState(null);
   const [isClickedLeft, setIsClickedLeft] = React.useState(true);
   const [isClickedRight, setIsClickedRight] = React.useState(false);
   const[userFirstName, setUserFirstName] = React.useState("");
-  const[userLasttName, setUserLastName] = React.useState("");
+  const[userLastName, setUserLastName] = React.useState("");
   const[userEmail, setUserEmail] = React.useState("");
   const[userPassword, setuserPassword] = React.useState("");
   /*React.useEffect(() => {
@@ -19,11 +19,45 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);*/
-
+  const handleSignupSubmit = async (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userFirstName, userLastName, userEmail, userPassword })
+    };
+    const response = await fetch("/signup", requestOptions);
+    if (response.status === 201) {
+      navigate("/home");
+    }
+    else {
+      alert("ERROR");
+      // TODO: Display specific errors (server vs client)
+    }
+  };
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userEmail, userPassword })
+    };
+    const response = await fetch("/login", requestOptions);
+    if (response.status === 201) {
+      navigate("/home");
+    }
+    else {
+      alert("ERROR");
+      // TODO: Display specific errors (server vs client)
+    }
+  };
   function GetFirstName(){
+    const handleInput = (event) => {
+      setUserFirstName(event.target.value);
+    };
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange={handleInput}
       className = "App-FirstName-TextField" />
     </label>
     );
@@ -34,7 +68,7 @@ function App() {
     };
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange={handleInput}
       className = "App-LastName-TextField" />
     </label>
     );
@@ -45,7 +79,7 @@ function App() {
     };
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange={handleInput}
       className = "App-GetAddress-TextField" />
     </label>
     );
@@ -56,7 +90,7 @@ function App() {
     }
     return(
       <label>
-      <input type = "text" 
+      <input type = "password" onChange={handleInput}
       className = "App-GetPassword-TextField" />
     </label>
     );
@@ -104,9 +138,9 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-SignUp-Button-Container">
+            <button className = "App-SignUp-Button-Container" onClick = {handleSignupSubmit}>
               SIGN UP
-            </div>
+            </button>
           </div>
         </div>
     );
@@ -130,22 +164,20 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-LogIn-Button-Container">
+            <button className = "App-LogIn-Button-Container" onClick={handleLoginSubmit}>
               LOG IN
-            </div>
+            </button>
           </div>
         </div>
     );
   }
   return (
     <div className="App">
-    <Router>
-      <Routes>
-        <Route element={<App/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/home" element={<Home/>}/>
-      </Routes>
-    </Router>
+    <Routes>
+      <Route element={<App/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/home" element={<Home/>}/>
+    </Routes>
       <div className="App-background">
         <div className = "App-white-box-overlay">
           <div className = "App-Signup-Login-Container">
