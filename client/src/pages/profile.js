@@ -20,7 +20,7 @@ function Profile(){
         <div className="Profile">
             <div className="Profile-background"></div>
             <div className="Profile-page"
-            style={{filter: toEdit ? "none":"inherit"}}
+            style={{filter: toEdit ? "none":"blur"}}
             >
             <div className="Rectangle">
                 <form className="Search-bar">

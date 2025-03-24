@@ -1,7 +1,7 @@
 .edit-popup{
     position:absolute;
     top: 20px;
-    left: 32%;
+    left: 25%;
     align-items: center;
     align-self: center;
     width: 50%;
@@ -12,16 +12,70 @@
 }
 .edit-inner{
     position: relative;
-    padding: 32px;
-    width: 50%;
-    max-width: 640px;
+    width: 80%;
+    left: 10%;
+    height: 500px;
     background-color: aliceblue;
+    border-style: dashed;
 }
 .close-button{
-    position: absolute;
     border-style: hidden;
     background-color: inherit;
-    top: 16px;
     font-size: x-large;
-    right: 16px;
+    padding-top: 15px;
+    margin-left: 85%;
+    padding-bottom: 30px;
+}
+.User-edit-section{
+    padding-bottom: 10px;
+    height: 50px;
+}
+.Username{
+    border-style:solid;
+    width: 60%;
+    font-size:x-large;
+    border-radius: 50px;
+    background-color: white;
+    text-indent: 10px;
+}
+
+.Description-edit-section{
+    position: relative;
+    height:60%;
+    border-style: dashed;
+}
+.Edit-description-area{
+    margin: 5px;
+    resize: none;
+    width: 85%;
+    font-size: large;
+    font-family: inherit;
+    height: 90%;
+    border-style: hidden;
+    outline-color: white;
+}
+.Description-text-box-back{
+    width: 85%;
+    background-color: white;
+    border-style: solid;
+    height: 70%;
+    margin: auto;
+    border-radius: 50px;
+}
+.Description{
+    background-color: white;
+    width: 85%;
+    min-height: 100px;
+    font-size: large;
+    text-align: 0px;
+    text-wrap-mode:wrap;
+}
+.Profile-save-button{
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: pink;
+    font-size: large;
+    font-family: inherit;
 }
