@@ -74,7 +74,60 @@ app.post("/login", (req, res) => {
     }
   );
 });
+// Signup route
+app.post("/signup", (req, res) => {
+  const { username, password } = req.body;
 
+  // Check if username and password are provided
+  if (!username || !password) {
+    return res.status(400).json({ message: "Username and password are required" });
+  }
+
+  // Check if the username already exists
+  connection.query(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    (err, results) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ message: "Database error" });
+      }
+
+      if (results.length > 0) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+
+      // Hash the password before saving it
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) {
+          console.error("Bcrypt error:", err);
+          return res.status(500).json({ message: "Error hashing password" });
+        }
+
+        // Insert the new user into the database
+        connection.query(
+          "INSERT INTO users (username, password) VALUES (?, ?)",
+          [username, hashedPassword],
+          (err, results) => {
+            if (err) {
+              console.error("Database error:", err);
+              return res.status(500).json({ message: "Error saving user" });
+            }
+
+            // Respond with a success message
+            res.status(201).json({
+              message: "Signup successful",
+              user: {
+                id: results.insertId,
+                username: username
+              }
+            });
+          }
+        );
+      });
+    }
+  );
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
