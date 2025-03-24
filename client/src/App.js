@@ -27,7 +27,9 @@ function App() {
       body: JSON.stringify({ userFirstName, userLastName, userEmail, userPassword })
     };
     const response = await fetch("/signup", requestOptions);
+    const data = await response.json();
     if (response.status === 201) {
+      localStorage.setItem('token', data.jwtToken);
       navigate("/home");
     }
     else {
@@ -43,7 +45,9 @@ function App() {
       body: JSON.stringify({ userEmail, userPassword })
     };
     const response = await fetch("/login", requestOptions);
+    const data = await response.json();
     if (response.status === 201) {
+      localStorage.setItem('token', data.jwtToken);
       navigate("/home");
     }
     else {
