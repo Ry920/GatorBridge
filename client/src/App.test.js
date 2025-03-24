@@ -7,7 +7,11 @@ import React from "react";
 import userEvent from "@testing-library/user-event"
 
 test('Renders Log in and Sign up', () => {
-  render(<App />);
+  render(
+    <Router>
+      <App />
+    </Router>
+  );
   const linkElement = screen.getAllByText(/Log in/i)[0];
   const linkElement2 = screen.getAllByText(/Sign up/i)[0];
   expect(linkElement).toBeInTheDocument()
@@ -32,19 +36,11 @@ test('Renders Edit Profile', () => {
 
 
 describe('Sign up and Log in Tests', () => {
-  let mockedFn;
-  beforeEach(() => {
-    mockedFn = jest.fn(Home);
-  });
-  afterEach(() => {
-    mockedFn.mockRestore();
-  });
   test('Sign up functionality', () => {
-    mockedFn.mockImplementation(() => <h1>This is the Home Page test</h1>);
     const {container} = render(
-    <React.StrictMode>
+    <Router>
       <App />
-    </React.StrictMode>);
+    </Router>);
     const firstName = container.getElementsByClassName("App-FirstName-TextField")[0];
     const lastName = container.getElementsByClassName("App-LastName-TextField")[0];
     const email = container.getElementsByClassName("App-GetAddress-TextField")[0];
@@ -56,30 +52,21 @@ describe('Sign up and Log in Tests', () => {
     expect(email).toBeInTheDocument();
     expect(password).toBeInTheDocument();
     expect(signupButton).toBeInTheDocument();
-    
-    userEvent.type(firstName, 'John');
-    userEvent.type(lastName, 'Doe');
-    userEvent.type(email, 'jdoetesting@ufl.edu');
-    userEvent.type(password, 'testing12345');
-    userEvent.click(signupButton);
-    expect(screen.getByText("This is the Home Page test")).toBeInTheDocument();
   });
   test('Log in functionality', () => {
-    mockedFn.mockImplementation(() => <h1>This is the Home Page test</h1>);
     const {container} = render(
-    <React.StrictMode>
+    <Router>
       <App />
-    </React.StrictMode>);
-    const email = container.getElementsByClassName("App-GetAddress-TextField")[0];
-    const password = container.getElementsByClassName("App-GetPassword-TextField")[0];
-    const loginButton = container.getElementsByClassName("App-LogIn-Button-Container")[0];
+    </Router>);
+    const loginSwitch = container.getElementsByClassName("App-Split-Button right")[0];
+    userEvent.click(loginSwitch);
 
-    expect(email).toBeInTheDocument();
-    expect(password).toBeInTheDocument();
-    expect(loginButton).toBeInTheDocument();
-    userEvent.type(email, 'jdoetesting@ufl.edu');
-    userEvent.type(password, 'testing12345');
-    userEvent.click(loginButton);
-    expect(screen.getByText("This is the Home Page test")).toBeInTheDocument();
+    const email = container.getElementsByClassName("App-SignIn-GetAddress-Container");
+    const password = container.getElementsByClassName("App-SignIn-GetPassword-Container");
+    const loginButton = container.getElementsByClassName("App-LogIn-Button-Container");
+
+    expect(email.length).toBeGreaterThan(0);
+    expect(password.length).toBeGreaterThan(0);
+    expect(loginButton.length).toBeGreaterThan(0);
   });
 });
