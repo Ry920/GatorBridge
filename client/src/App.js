@@ -173,11 +173,6 @@ function App() {
   }
   return (
     <div className="App">
-    <Routes>
-      <Route element={<App/>}/>
-      <Route path="/profile" element={<Profile/>}/>
-      <Route path="/home" element={<Home/>}/>
-    </Routes>
       <div className="App-background">
         <div className = "App-white-box-overlay">
           <div className = "App-Signup-Login-Container">

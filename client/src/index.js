@@ -2,13 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Home from './pages/home'
+import Profile from './pages/profile'
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router } from 'react-router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-    <App />
+    <Routes>
+      <Route path="*" element={<App/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/home" element={<Home/>}/>
+    </Routes>
   </Router>
 );
 
