@@ -145,6 +145,19 @@ app.post("/verifytoken", authenticate, (req, res) => {
   });
 });
 
+app.post("/search", (req, res) => {
+  const searchText = req.body.searchText;
+  con.query(`SELECT * FROM Posts WHERE PostText LIKE "%${searchText}%"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+    return res.status(200).json(result);
+  });
+});
+
 app.listen(PORT, () => {
   
 });
