@@ -7,7 +7,7 @@ const mysql = require('mysql2');
 const con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS,
+  password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
 
@@ -23,6 +23,11 @@ app.get("/api", (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const userInfo = req.body;
+  if (!userInfo.userEmail.endsWith("@ufl.edu")) {
+    return res.status(400).send({
+      message: "Invalid email."
+    });
+  }
   if (userInfo.userFirstName == "") {
     return res.status(400).send({
       message: "No first name specified."
@@ -115,6 +120,7 @@ app.post("/login", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+  
 });
 
+module.exports = app;
