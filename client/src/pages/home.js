@@ -27,9 +27,9 @@ function Home() {
     <div className="Home">
       <header className="Home-header">
         <form onSubmit={handleSubmit}>
-          <text>What do you want to discuss?</text>
+          <p>What do you want to discuss?</p>
           <input type="text" onChange={(e) => {setPostText(e.target.value); setTextSize(255 - e.target.value.length)}}></input>
-          <text>{textSize}</text>
+          <div>{textSize}</div>
           <button type="submit">Post</button>
         </form>
         <Link to="/profile">Profile</Link>
