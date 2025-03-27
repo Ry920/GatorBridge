@@ -7,7 +7,6 @@
 }
 .Profile-page{
     position: absolute;
-    filter: blur(50px);
     top: 0px;
 }
 .Search{
@@ -89,5 +88,6 @@
     margin-right: 50px;
     font-family: inherit;
     font-size: large;
+    text-align: left;
 }
 
