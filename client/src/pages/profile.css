@@ -7,7 +7,6 @@
 }
 .Profile-page{
     position: absolute;
-    filter: blur(50px);
     top: 0px;
 }
 .Search{
@@ -76,7 +75,7 @@
 .Profile-edit-button{
     width: 150px;
     height: 40px;
-    margin-left: 600px;
+    margin-left: 550px;
     margin-top: 22px;
     border-radius: 25px;
     border-style: solid;
@@ -89,5 +88,6 @@
     margin-right: 50px;
     font-family: inherit;
     font-size: large;
+    text-align: left;
 }
 
