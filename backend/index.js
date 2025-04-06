@@ -9,6 +9,7 @@ require("dotenv").config(); // To use the environment variables for DB credentia
 const SECRET_KEY = process.env.JWT_SECRET
 const app = express();
 const PORT = process.env.PORT || 3001;
+const DB_PORT = process.env.DB_PORT || 3306;
 
 app.use(bodyParser.json());
 
@@ -17,7 +18,8 @@ const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  port: DB_PORT
 });
 
 // Connect to MySQL database
