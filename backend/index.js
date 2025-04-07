@@ -146,6 +146,13 @@ app.post("/signup", (req, res) => {
     }
   );
 });
+
+app.post("/verifytoken", authenticate, (req, res) => {
+  res.status(200).json({
+    message: "Verified"
+  });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

@@ -1,7 +1,13 @@
 .Home {
     text-align: center;
   }
-  
+  .Home-Background{
+    background-image: url("../a9c2638e9c681ae16c59abccdf38c41b.png");
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
   .Home-logo {
     height: 40vmin;
     pointer-events: none;
