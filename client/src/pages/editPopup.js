@@ -25,7 +25,7 @@ return(props.trigger) ? (
     <div className="edit-popup">
         <div className="edit-inner">
             <button className="close-button"
-            onMouseDown={() => {props.setTrigger(false); handleNotHoverX(); handleClickOut();}}
+            onMouseDown={() => {props.setTrigger(false); handleNotHoverX();}}
             onMouseEnter={handleHoverX}
             onMouseLeave={handleNotHoverX}
             style={{backgroundColor: onHoverX ? "pink":"inherit", color: onHoverX ? "white":"black"}}
@@ -47,7 +47,7 @@ return(props.trigger) ? (
                             onMouseEnter={handleHoverSave}
                             onMouseLeave={handleNotHoverSave}
                             style={{backgroundColor: onHoverSave ? 'pink':''}}
-                            onMouseDown={() => {props.setTrigger(false); handleNotHoverSave();handleClickOut();}}
+                            onMouseDown={() => {props.setTrigger(false); handleNotHoverSave();}}
                             >
                             Save Changes
             </button>
