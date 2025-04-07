@@ -2,13 +2,12 @@
     position:absolute;
     top: 20px;
     left: 25%;
-    align-items: center;
-    align-self: center;
     width: 50%;
     height: 500px;
     background-color: bisque;
-    display: flex;
     border-radius: 50px;
+    /* border-style: groove; */
+    display: block;
 }
 .edit-inner{
     position: relative;
@@ -16,43 +15,50 @@
     left: 10%;
     height: 500px;
     background-color: aliceblue;
-    border-style: dashed;
+    /* border-style: dashed; */
 }
 .close-button{
+    position: relative;
     border-style: hidden;
     background-color: inherit;
     font-size: x-large;
-    padding-top: 15px;
-    margin-left: 85%;
-    padding-bottom: 30px;
+    padding-top: 10px;
+    margin-left: 95%;
+    padding-bottom: 10px;
 }
 .User-edit-section{
+    position: relative;;
+    padding-top: 30px;
     padding-bottom: 10px;
     height: 50px;
+    /* border-style: double; */
+    width: 100%;
 }
 .Username{
-    border-style:solid;
-    width: 60%;
+    display: block;
+    /* border-style:solid; */
+    width: 70%;
     font-size:x-large;
     border-radius: 50px;
     background-color: white;
     text-indent: 10px;
+    margin: auto;
 }
-
 .Description-edit-section{
     position: relative;
     height:60%;
-    border-style: dashed;
+    /* border-style: dashed; */
 }
 .Edit-description-area{
-    margin: 5px;
+    margin-left: 25px;
+    margin-top: 7px;
     resize: none;
-    width: 85%;
+    width: 87%;
     font-size: large;
     font-family: inherit;
     height: 90%;
     border-style: hidden;
-    outline-color: white;
+    outline-color: rgb(255, 255, 255);
 }
 .Description-text-box-back{
     width: 85%;
@@ -62,14 +68,6 @@
     margin: auto;
     border-radius: 50px;
 }
-.Description{
-    background-color: white;
-    width: 85%;
-    min-height: 100px;
-    font-size: large;
-    text-align: 0px;
-    text-wrap-mode:wrap;
-}
 .Profile-save-button{
     width: 150px;
     height: 40px;
@@ -78,4 +76,6 @@
     border-color: pink;
     font-size: large;
     font-family: inherit;
+    margin: auto;
+    display: block;
 }
