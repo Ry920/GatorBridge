@@ -27,7 +27,10 @@ const authenticate = (req, res, func) => {
                         result: "error"
                     });
                 }
-                req.user = result;
+                req.user = {
+                    email: result.email,
+                    token: result
+                }
                 func();
             });
         });
