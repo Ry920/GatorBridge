@@ -1,0 +1,89 @@
+.edit-popup{
+    position:fixed;
+    top: 20px;
+    left: 25%;
+    width: 50%;
+    height: 500px;
+    background-color: bisque;
+    border-radius: 50px;
+    /* border-style: groove; */
+    display: block;
+    pointer-events: all;
+}
+.edit-inner{
+    position: relative;
+    width: 80%;
+    left: 10%;
+    height: 500px;
+    background-color: aliceblue;
+    /* border-style: dashed; */
+}
+.close-button{
+    position: relative;
+    border-style: hidden;
+    background-color: inherit;
+    font-size: x-large;
+    padding-top: 10px;
+    margin-left: 95%;
+    padding-bottom: 10px;
+
+}
+.Title-edit-section{
+    position: relative;;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    height: 50px;
+    /* border-style: double; */
+    width: 100%;
+}
+.Title{
+    display: block;
+    /* border-style:solid; */
+    width: 70%;
+    font-size:x-large;
+    border-radius: 50px;
+    background-color: white;
+    text-indent: 10px;
+    margin: auto;
+}
+.Description-edit-section{
+    position: relative;
+    height:60%;
+    /* border-style: dashed; */
+}
+.Edit-description-area{
+    margin-left: 25px;
+    margin-top: 7px;
+    resize: none;
+    width: 87%;
+    font-size: large;
+    font-family: inherit;
+    height: 90%;
+    border-style: hidden;
+    text-align: left;
+    vertical-align: top;
+    outline-color: rgb(255, 255, 255);
+}
+.Edit-description-area::placeholder-shown{
+    text-align: center;
+    padding-top: 80px;
+}
+.Description-text-box-back{
+    width: 85%;
+    background-color: white;
+    border-style: solid;
+    height: 70%;
+    margin: auto;
+    border-radius: 50px;
+}
+.create-post-button{
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: pink;
+    font-size: large;
+    font-family: inherit;
+    margin: auto;
+    display: block;
+}

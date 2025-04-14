@@ -2,65 +2,103 @@ import React from "react";
 import "./App.css";
 import Profile from "./pages/profile.js"
 import Home from "./pages/home.js"
-import { BrowserRouter as Router, Routes, Route } from "react-router";
-
+import {Routes, Route, useNavigate } from "react-router";
 
 function App() {
 
-  //const [data, setData] = React.useState(null);
+  const navigate = useNavigate();
+
   const [isClickedLeft, setIsClickedLeft] = React.useState(true);
   const [isClickedRight, setIsClickedRight] = React.useState(false);
-  const[userFirstName, setUserFirstName] = React.useState("");
-  const[userLasttName, setUserLastName] = React.useState("");
-  const[userEmail, setUserEmail] = React.useState("");
-  const[userPassword, setuserPassword] = React.useState("");
-  /*React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);*/
+  const[firstname, setfirstname] = React.useState("");
+  const[lastname, setlastname] = React.useState("");
+  const[email, setemail] = React.useState("");
+  const[password, setpassword] = React.useState("");
+
+  const handleSignupSubmit = async(event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify ({firstname, lastname, email, password})
+    }
+    const response = await fetch("/signup", requestOptions);
+    const data = await response.json();
+    if (response.status == 201)
+    {
+      localStorage.setItem('token', data.user.token);
+      navigate("/home");
+    } else {
+      alert("ERROR");
+    }
+  };
+
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    };
+    const response = await fetch("/login", requestOptions);
+    const data = await response.json();
+    if (response.status === 201) {
+      localStorage.setItem('token', data.user.token);
+      navigate("/home");
+    }
+    else {
+      alert("ERROR");
+      // TODO: Display specific errors (server vs client)
+    }
+  };
 
   function GetFirstName(){
+    const handleInput = (event) => {
+      setfirstname(event.target.value);
+    }
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange={handleInput}
       className = "App-FirstName-TextField" />
     </label>
     );
   }
   function GetLastName(){
     const handleInput = (event) => {
-      setUserLastName(event.target.value);
+      setlastname(event.target.value);
     };
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange = {handleInput}
       className = "App-LastName-TextField" />
     </label>
     );
   }
+
   function GetEmail(){
     const handleInput = (event) => {
-      setUserEmail(event.target.value);
+      setemail(event.target.value);
     };
     return(
     <label>
-      <input type = "text" 
+      <input type = "text" onChange = {handleInput}
       className = "App-GetAddress-TextField" />
     </label>
     );
   }
+
   function GetPassword(){
     const handleInput = (event) => {
-      setuserPassword(event.target.value);
+      setpassword(event.target.value);
     }
     return(
       <label>
-      <input type = "text" 
+      <input type = "text" onChange = {handleInput}
       className = "App-GetPassword-TextField" />
     </label>
     );
   }
+
   const handleLeftClick = () => {
         setIsClickedLeft(true);
         setIsClickedRight(false);
@@ -104,7 +142,7 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-SignUp-Button-Container">
+            <div className = "App-SignUp-Button-Container" onClick = {handleSignupSubmit}>
               SIGN UP
             </div>
           </div>
@@ -130,7 +168,7 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-LogIn-Button-Container">
+            <div className = "App-LogIn-Button-Container" onClick = {handleLoginSubmit}>
               LOG IN
             </div>
           </div>
@@ -139,13 +177,6 @@ function App() {
   }
   return (
     <div className="App">
-    <Router>
-      <Routes>
-        <Route element={<App/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/home" element={<Home/>}/>
-      </Routes>
-    </Router>
       <div className="App-background">
         <div className = "App-white-box-overlay">
           <div className = "App-Signup-Login-Container">
