@@ -59,7 +59,6 @@ function App() {
     return(
     <label>
       <input type = "text" onChange={handleInput}
-      <input type = "text" onChange={handleInput}
       className = "App-FirstName-TextField" />
     </label>
     );
@@ -143,7 +142,7 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-SignUp-Button-Container" onClick = {handleSignupSubmit}>
+            <button className = "App-SignUp-Button-Container" onClick = {handleSignupSubmit}>
               SIGN UP
             </button>
           </div>
@@ -169,7 +168,7 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <div className = "App-LogIn-Button-Container" onClick = {handleLoginSubmit}>
+            <button className = "App-LogIn-Button-Container" onClick = {handleLoginSubmit}>
               LOG IN
             </button>
           </div>
