@@ -59,6 +59,7 @@ function App() {
     return(
     <label>
       <input type = "text" onChange={handleInput}
+      <input type = "text" onChange={handleInput}
       className = "App-FirstName-TextField" />
     </label>
     );
@@ -144,7 +145,7 @@ function App() {
             </div>
             <div className = "App-SignUp-Button-Container" onClick = {handleSignupSubmit}>
               SIGN UP
-            </div>
+            </button>
           </div>
         </div>
     );
@@ -170,7 +171,7 @@ function App() {
             </div>
             <div className = "App-LogIn-Button-Container" onClick = {handleLoginSubmit}>
               LOG IN
-            </div>
+            </button>
           </div>
         </div>
     );
