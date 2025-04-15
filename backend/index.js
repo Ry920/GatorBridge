@@ -13,6 +13,8 @@ const DB_PORT = process.env.DB_PORT || 3306;
 
 app.use(bodyParser.json());
 
+//
+
 // Set up MySQL database connection
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -146,10 +148,121 @@ app.post("/signup", (req, res) => {
     }
   );
 });
+//create seperate username for setting default
+app.post("/usernameCheckDefault", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const userEmail = req.user.email;
+  connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+    if (result[0].username != null){
+      return res.status(200).json(result);
+    }  
+    else{
+      return res.status(200).json({userNull: true});
+    }
+  });
+});
+app.post("/userSetDef", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const userEmail = req.user.email;
+  connection.query(`UPDATE users SET username = "${userEmail}" WHERE email = "${userEmail}"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+      return res.status(200).json(result);
+  });
+});
+
+app.post("/username", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const userEmail = req.user.email;
+  connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+    return res.status(200).json(result);
+  });
+});
+
+app.post("/biography", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const userEmail = req.user.email;
+  connection.query(`SELECT biography FROM users WHERE email = "${userEmail}"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      console.log("first q");
+      return res.status(500).json({
+        message: "Server error. first q"
+      });
+    }
+    if (result[0].biography === null){
+      connection.query(`UPDATE users SET biography = 'Here to talk all things UF!' WHERE email = "${userEmail}"`, (err, updatedResult) => {
+        if (err) {
+          console.log(err.stack);
+          console.log("second q");
+          return res.status(500).json({
+            message: "Server error. second q"
+          });
+        }
+      });
+    }
+    else{
+      return res.status(200).json(result);
+    }
+});
+});
+
+app.post("/usernameCheckMultiple", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const {userEdit} = req.body;
+  const email = req.user.email;
+  if (userEdit === ""){
+    return res.status(400).json({ message: "username too short" });
+  }
+  connection.query(`SELECT username FROM users WHERE username = "${userEdit}"`, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: `Server error. "${userEdit}"`
+      });
+    }
+    if (result.length > 0){
+      return res.status(400).json({ message: "username already exists" });
+    }
+    return res.status(200).json(result);
+  });
+});
+
+app.post("/usernameChange", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const {userEdit} = req.body;
+  const email = req.user.email;
+  connection.query(`UPDATE users SET username = "${userEdit}" WHERE email = "${email}"`, (err, newUser) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+    return res.status(200).json(newUser);
+  })
+});
 
 app.post("/verifytoken", authenticate, (req, res) => {
   res.status(200).json({
-    message: "Verified"
+    message: "Verified",
+    user: req.user
   });
 });
 
