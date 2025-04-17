@@ -3,10 +3,13 @@ import React, { useState } from "react"
 import { Link } from "react-router";
 import Popup from "./editPopupHome.js"
 
+
 function Home() {
   const [toEdit, settoEdit] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [posts, setPosts] = React.useState([]);
+  const [voteCount, setVoteCount] = useState(0);
+
   const handleSearch = async (event) => {
     event.preventDefault();
     if (searchText.length === 0) return;
@@ -25,6 +28,17 @@ function Home() {
       alert("Error searching");
     }
   }
+
+  const handleUpVote = () => {
+    {/* This is a pseudo code for how the vote count would work for each post
+      but for actual version, we would probably have to store the vote count into a database for each individual post*/}
+    setVoteCount(voteCount + 1);
+  }
+
+  const handleDownVote = () => {
+    setVoteCount(voteCount - 1);
+  }
+
   const listSearch = () =>{
     return(
     <header className = "Home-display-messages-container">
@@ -49,7 +63,36 @@ function Home() {
     );
   }
   const defaultList = () => {
-    
+    return (
+      <header className = "Home-message-layout">
+        <header className = "Home-message-row-container">
+          <div className = "Home-message-title">
+            {/* post.title */}
+            title
+          </div>
+          <div className = "Home-message-author">
+            {/* post.author */}
+            author
+          </div>
+        </header>
+        <div className = "Home-message-content">
+            {/* post.content */}
+            message content
+        </div>
+        <div className = "Home-message-vote-counter">
+          <button onClick = {handleUpVote} className = "Home-message-upvote" >
+          </button>
+          <button onClick = {handleDownVote} className = "Home-message-downvote">
+          </button>
+          <div className = "Home-message-display-counter">
+            {voteCount}
+          </div>
+        </div>
+      </header>
+      
+
+
+    );
   }
   const handleCreatePostClick = () => {
     settoEdit(true);

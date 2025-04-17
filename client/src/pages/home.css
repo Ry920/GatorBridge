@@ -13,13 +13,14 @@
   }
   
   .Home-header {
-    background-image: url('Backdrop.png');
-    background-size:cover;
-    width: 1440px;
-    height: 1024px;
-    min-height: 100%;
-    min-width: 100%;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    background-image: url('../Backdrop.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 1000px;
+    min-width: 100vh;
+    height: 100vh;
   }
   
   .Home-link {
@@ -102,7 +103,7 @@
   }
   .Home-display-messages-container{
     position: absolute;
-    width: 897px;
+    width: 920px;
     top: 210px;
     left: 77px;
     height: 570px;
@@ -115,7 +116,7 @@
   .Home-message-layout{
     flex-shrink: 0;
     position:relative;
-    width: 870px;
+    width: 895px;
     height: 142px;
     border-radius: 10px;
     border: 1px solid #66666659;
@@ -151,4 +152,45 @@
     top: 60px;
     left: 40px;
     font-size: 20px;
+  }
+  .Home-message-vote-counter{
+    position:absolute;
+    width: 75px;
+    height: 135px;
+    left: 815px;
+    top: 5px;
+    display:flex;
+    flex-direction:column;
+  }
+  .Home-message-upvote{
+    position:absolute;
+    top: 3px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../thumbs-up.png");
+    background-size:contain;
+    background-position:center;
+    background-color: green;
+  }
+  .Home-message-downvote{
+    position:absolute;
+    top: 92px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../thumbs-down.png");
+    background-size:contain;
+    background-position:center;
+    background-color:red;
+  }
+  .Home-message-display-counter{
+    position:absolute;
+    top: 47px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }

@@ -40,35 +40,37 @@ function Popup(props){
         }
       }
 return(props.trigger) ? (
-    <div className="edit-popup">
-        <div className="edit-inner">
-            <button className="close-button"
-            onMouseDown={() => {props.setTrigger(false); handleNotHoverX(); handleClickOut();}}
-            onMouseEnter={handleHoverX}
-            onMouseLeave={handleNotHoverX}
-            style={{backgroundColor: onHoverX ? "pink":"inherit", color: onHoverX ? "white":"black"}}
-            >X</button>
-            {props.children}
-            <div className="Title-edit-section">
-                <form className="Edit-username-form">
-                        <input type="text" name="Edit-name" placeholder="Title of Post" className="Title"></input>
-                </form>
-            </div>
-            <div className="Description-edit-section">
-                <div className="Description-text-box-back">
-                    <textarea placeholder="What do you want to discuss?" class="Edit-description-area"
-                    onChange={(e) => {setPostText(e.target.value); setTextSize(255 - e.target.value.length)}}>
-                    </textarea>
+    <div className = "edit-popup-overlay">
+        <div className="edit-popup">
+            <div className="edit-inner">
+                <button className="close-button"
+                onMouseDown={() => {props.setTrigger(false); handleNotHoverX(); handleClickOut();}}
+                onMouseEnter={handleHoverX}
+                onMouseLeave={handleNotHoverX}
+                style={{backgroundColor: onHoverX ? "pink":"inherit", color: onHoverX ? "white":"black"}}
+                >X</button>
+                {props.children}
+                <div className="Title-edit-section">
+                    <form className="Edit-username-form">
+                            <input type="text" name="Edit-name" placeholder="Title of Post" className="Title"></input>
+                    </form>
                 </div>
-            </div>   
-            <button className="create-post-button"
-                            onMouseEnter={handleHoverSave}
-                            onMouseLeave={handleNotHoverSave}
-                            style={{backgroundColor: onHoverSave ? 'pink':''}}
-                            onMouseDown={(e) => {props.setTrigger(false); handleNotHoverSave();handleClickOut();handleSubmit(e);}}
-                            >
-                            CREATE POST
-            </button>
+                <div className="Description-edit-section">
+                    <div className="Description-text-box-back">
+                        <textarea placeholder="What do you want to discuss?" class="Edit-description-area"
+                        onChange={(e) => {setPostText(e.target.value); setTextSize(255 - e.target.value.length)}}>
+                        </textarea>
+                    </div>
+                </div>   
+                <button className="create-post-button"
+                                onMouseEnter={handleHoverSave}
+                                onMouseLeave={handleNotHoverSave}
+                                style={{backgroundColor: onHoverSave ? 'pink':''}}
+                                onMouseDown={(e) => {props.setTrigger(false); handleNotHoverSave();handleClickOut();handleSubmit(e);}}
+                                >
+                                CREATE POST
+                </button>
+            </div>
         </div>
     </div>
 ) : "";
