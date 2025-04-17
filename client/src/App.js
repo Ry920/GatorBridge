@@ -2,37 +2,41 @@ import React from "react";
 import "./App.css";
 import Profile from "./pages/profile.js"
 import Home from "./pages/home.js"
-import {Routes, Route, useNavigate } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
+
 
 function App() {
-
   const navigate = useNavigate();
-
+  //const [data, setData] = React.useState(null);
   const [isClickedLeft, setIsClickedLeft] = React.useState(true);
   const [isClickedRight, setIsClickedRight] = React.useState(false);
-  const[firstname, setfirstname] = React.useState("");
-  const[lastname, setlastname] = React.useState("");
-  const[email, setemail] = React.useState("");
-  const[password, setpassword] = React.useState("");
-
-  const handleSignupSubmit = async(event) => {
+  const[firstname, setFirstName] = React.useState("");
+  const[lastname, setLastName] = React.useState("");
+  const[email, setEmail] = React.useState("");
+  const[password, setPassword] = React.useState("");
+  /*React.useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);*/
+  const handleSignupSubmit = async (event) => {
     event.preventDefault();
     const requestOptions = {
       method: "POST",
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify ({firstname, lastname, email, password})
-    }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstname, lastname, email, password })
+    };
     const response = await fetch("/signup", requestOptions);
     const data = await response.json();
-    if (response.status == 201)
-    {
+    if (response.ok) {
       localStorage.setItem('token', data.user.token);
       navigate("/home");
-    } else {
+    }
+    else {
       alert("ERROR");
+      // TODO: Display specific errors (server vs client)
     }
   };
-
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     const requestOptions = {
@@ -42,7 +46,7 @@ function App() {
     };
     const response = await fetch("/login", requestOptions);
     const data = await response.json();
-    if (response.status === 201) {
+    if (response.ok) {
       localStorage.setItem('token', data.user.token);
       navigate("/home");
     }
@@ -51,11 +55,10 @@ function App() {
       // TODO: Display specific errors (server vs client)
     }
   };
-
   function GetFirstName(){
     const handleInput = (event) => {
-      setfirstname(event.target.value);
-    }
+      setFirstName(event.target.value);
+    };
     return(
     <label>
       <input type = "text" onChange={handleInput}
@@ -65,40 +68,37 @@ function App() {
   }
   function GetLastName(){
     const handleInput = (event) => {
-      setlastname(event.target.value);
+      setLastName(event.target.value);
     };
     return(
     <label>
-      <input type = "text" onChange = {handleInput}
+      <input type = "text" onChange={handleInput}
       className = "App-LastName-TextField" />
     </label>
     );
   }
-
   function GetEmail(){
     const handleInput = (event) => {
-      setemail(event.target.value);
+      setEmail(event.target.value);
     };
     return(
     <label>
-      <input type = "text" onChange = {handleInput}
+      <input type = "text" onChange={handleInput}
       className = "App-GetAddress-TextField" />
     </label>
     );
   }
-
   function GetPassword(){
     const handleInput = (event) => {
-      setpassword(event.target.value);
+      setPassword(event.target.value);
     }
     return(
       <label>
-      <input type = "text" onChange = {handleInput}
+      <input type = "password" onChange={handleInput}
       className = "App-GetPassword-TextField" />
     </label>
     );
   }
-
   const handleLeftClick = () => {
         setIsClickedLeft(true);
         setIsClickedRight(false);
@@ -168,7 +168,7 @@ function App() {
               </div>
               {GetPassword()}
             </div>
-            <button className = "App-LogIn-Button-Container" onClick = {handleLoginSubmit}>
+            <button className = "App-LogIn-Button-Container" onClick={handleLoginSubmit}>
               LOG IN
             </button>
           </div>
@@ -207,4 +207,3 @@ function App() {
 
 
 export default App;
-
