@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import './editPopup.css'
 import Profile from './profile.js'
 
@@ -21,6 +21,12 @@ function Popup(props){
     const handleNotHoverSave = () => {
         setOnHoverSave(false);
     };
+    const handleBioClear = () => {
+        setBiographyEdit("");
+    }
+    const handleUserClear = () => {
+        setUserEdit("");
+    }
     const handleClickOut = () => {
         settoEdit(false);
         console.log('clicked ?', toEdit)
@@ -30,6 +36,11 @@ function Popup(props){
         console.log('new name', userEdit);
 
     }
+    const handleBioEdit = (event) => {
+        setBiographyEdit(event.target.value);
+        console.log('new bio', biographyEdit);
+
+    }
     const handleUsernameCheck = async (event) => {
         const requestOptions = {
             method: "POST",
@@ -37,7 +48,7 @@ function Popup(props){
             body: JSON.stringify({userEdit})
         };
         const response = await fetch("/usernameCheckMultiple", requestOptions);
-        console.log("Response status:", response.status);
+        console.log("Response status check:", response.status);
         if (response.ok) {
             await handleUsernameChange();
         }
@@ -56,12 +67,32 @@ function Popup(props){
         if (response.ok) {
             const user = await response.json();
             console.log(userEdit);
-            //Profile.setUsername(userEdit);
         }
         else {
             alert("Error changing usernameChange");
         }
     }
+    const handleBioChange = async (event) => {
+        const requestOptions = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({biographyEdit})
+        };
+        const response = await fetch("/biographyChange", requestOptions);
+        console.log("Response status:", response.status);
+        if (response.ok) {
+            const biography = await response.json();
+            console.log(userEdit);
+        }
+        else {
+            alert("Error changing bioChange");
+        }
+    }
+    useEffect(() => {
+        handleBioClear();
+        handleUserClear();
+      }, [props.trigger]);
+
 return(props.trigger) ? (
     <div className="edit-popup">
         <div className="edit-inner">
@@ -74,12 +105,12 @@ return(props.trigger) ? (
             {props.children}
             <div className="User-edit-section">
                 <form className="Edit-username-form">
-                        <input type="text" name="Edit-name" placeholder="Username" className="Username" onChange={handleUserEdit}></input>
+                        <input type="text" name="Edit-name" placeholder="Username" className="Username" onChange={handleUserEdit} maxLength={32}></input>
                 </form>
             </div>
             <div className="Description-edit-section">
                 <div className="Description-text-box-back">
-                    <textarea className="Edit-description-area" placeholder="Biography">
+                    <textarea className="Edit-description-area" placeholder="Biography" onChange={handleBioEdit} maxLength={255}>
                         {/* <input type="text" name="Edit-description" placeholder="Description" className="Description"></input> */}
                     </textarea>
                 </div>
@@ -88,7 +119,18 @@ return(props.trigger) ? (
                             onMouseEnter={handleHoverSave}
                             onMouseLeave={handleNotHoverSave}
                             style={{backgroundColor: onHoverSave ? 'pink':''}}
-                            onMouseDown={() => {props.setTrigger(false); handleNotHoverSave();handleClickOut(); handleUsernameCheck();}}
+                            onMouseDown={() => {props.setTrigger(false); handleNotHoverSave();handleClickOut(); 
+                                if (userEdit !== '') {
+                                handleUsernameCheck(); 
+                                console.log('ttttrrue'); 
+                                console.log(userEdit);
+                                }
+                                if (biographyEdit !== ''){ 
+                                    handleBioChange();
+                                    console.log('truddcd');
+                                    console.log(biographyEdit);
+                                }
+                            }}
                             >
                             Save Changes
             </button>

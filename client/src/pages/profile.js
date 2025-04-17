@@ -19,7 +19,7 @@ function Profile(){
         console.log("Response status:", response.status);
         if (response.ok) {
             const desc = await response.json();
-            console.log(desc);
+            console.log(desc[0].biography);
             setDescriptionText(desc[0].biography);
         }
         else {
