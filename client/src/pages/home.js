@@ -2,13 +2,14 @@ import "./home.css";
 import React, { useState } from "react"
 import { Link } from "react-router";
 import Popup from "./editPopupHome.js"
-
+import { Routes, Route, useNavigate } from "react-router";
 
 function Home() {
   const [toEdit, settoEdit] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
   const [posts, setPosts] = React.useState([]);
   const [voteCount, setVoteCount] = useState(0);
+  const navigate = useNavigate();
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -105,6 +106,7 @@ function Home() {
 
         {/* !!! onclick = {Logout Functionality} !!!*/}
         <button type="submit"
+           onClick = {(e) => {localStorage.removeItem("token"); navigate("/*")}}
            className = "Home-logout-button" >Log Out</button>
 
         <Link to ="/profile">
