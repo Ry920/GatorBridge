@@ -73,10 +73,11 @@
     float: left;
 }
 .Profile-edit-button{
+    position:sticky;
     width: 150px;
     height: 40px;
-    margin-left: 550px;
-    margin-top: 22px;
+    top: 12%;
+    left: 75%;
     border-radius: 25px;
     border-style: solid;
     border-color: pink;
@@ -86,8 +87,10 @@
 .Profile-info-description{
     margin-left: 50px;
     margin-right: 50px;
+    height: 150px;
     font-family: inherit;
     font-size: large;
     text-align: left;
+    overflow-wrap:break-word;
 }
 

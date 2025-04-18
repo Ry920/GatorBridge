@@ -148,7 +148,6 @@ app.post("/signup", (req, res) => {
     }
   );
 });
-//create seperate username for setting default
 app.post("/usernameCheckDefault", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
   const userEmail = req.user.email;
@@ -256,6 +255,21 @@ app.post("/usernameChange", authenticate,(req, res) => {
       });
     }
     return res.status(200).json(newUser);
+  })
+});
+
+app.post("/biographyChange", authenticate,(req, res) => {
+  // const searchText = req.body.searchText;
+  const {biographyEdit} = req.body;
+  const email = req.user.email;
+  connection.query(`UPDATE users SET biography = "${biographyEdit}" WHERE email = "${email}"`, (err, newBio) => {
+    if (err) {
+      console.log(err.stack);
+      return res.status(500).json({
+        message: "Server error."
+      });
+    }
+    return res.status(200).json(newBio);
   })
 });
 
