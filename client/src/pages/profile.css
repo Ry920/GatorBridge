@@ -73,7 +73,7 @@
     float: left;
 }
 .Profile-edit-button{
-    position:fixed;
+    position:sticky;
     width: 150px;
     height: 40px;
     top: 12%;
@@ -87,8 +87,10 @@
 .Profile-info-description{
     margin-left: 50px;
     margin-right: 50px;
+    height: 150px;
     font-family: inherit;
     font-size: large;
     text-align: left;
+    overflow-wrap:break-word;
 }
 
