@@ -1,7 +1,6 @@
-.Home {
-    text-align: center;
+  .Home {
   }
-  
+
   .Home-logo {
     height: 40vmin;
     pointer-events: none;
@@ -14,25 +13,184 @@
   }
   
   .Home-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    background-image: url('../Backdrop.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 1000px;
+    min-width: 100vh;
+    height: 100vh;
   }
   
   .Home-link {
     color: #61dafb;
   }
   
-  @keyframes Home-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  .Home-grey-box-overlay{
+    background-color: rgba(230, 230, 230, 1);
+    position:absolute;
+    height: 788px;
+    width: 1030px;
+    left: 262px;
+    top: 118px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: black;
+  }
+  .Home-search-post-box{
+    position:absolute;
+    width: 897px;
+    height: 55px;
+    top: 44px;
+    left: 77px;
+    border-radius: 12px;
+    font-size: 20px;
+    text-indent: 10px;
+    border: 1px solid #66666659;
+  }
+  .Home-create-post-button{
+    position:absolute;
+    height: 64px;
+    width: 400px;
+    top: 124px;
+    left: 531px;
+    border-radius: 40px;
+    background-color: #030303;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .Home-search-post-button{
+    position:absolute;
+    height: 64px;
+    width: 400px;
+    top: 124px;
+    left: 120px;
+    border-radius: 40px;
+    background-color: #030303;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .Home-logout-button{
+    position:absolute;
+    width: 150px;
+    height: 54px;
+    left: 1260px;
+    top: 27px;
+    border-radius: 20px;
+    background-color:#030303;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .Home-profile-button{
+    position:absolute;
+    width: 150px;
+    height: 54px;
+    left: 1090px;
+    top: 27px;
+    border-radius: 20px;
+    background-color:#030303;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .Home-display-messages-container{
+    position: absolute;
+    width: 920px;
+    top: 210px;
+    left: 77px;
+    height: 570px;
+    overflow-y: auto;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    gap: 16px;
+  }
+  .Home-message-layout{
+    flex-shrink: 0;
+    position:relative;
+    width: 895px;
+    height: 142px;
+    border-radius: 10px;
+    border: 1px solid #66666659;
+    background-color: white;
+  }
+  .Home-message-row-container{
+    position: absolute;
+    top: 10px;
+    height:40px;
+    width: 500px;
+    left: 40px;
+    display:flex;
+    gap: 10px;
+  }
+  .Home-message-title{
+    display: inline-block;
+    max-width: 300px;
+    height: 40px;
+    font-size: 32px;
+  }
+  .Home-message-author{
+    display:inline-block;
+    display:flex;
+    align-items: flex-end;
+    max-width: 200px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .Home-message-content{
+    position: absolute;
+    width: 768px;
+    height: 44px;
+    top: 60px;
+    left: 40px;
+    font-size: 20px;
+  }
+  .Home-message-vote-counter{
+    position:absolute;
+    width: 75px;
+    height: 135px;
+    left: 815px;
+    top: 5px;
+    display:flex;
+    flex-direction:column;
+  }
+  .Home-message-upvote{
+    position:absolute;
+    top: 3px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../thumbs-up.png");
+    background-size:contain;
+    background-position:center;
+    background-color: green;
+  }
+  .Home-message-downvote{
+    position:absolute;
+    top: 92px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../thumbs-down.png");
+    background-size:contain;
+    background-position:center;
+    background-color:red;
+  }
+  .Home-message-display-counter{
+    position:absolute;
+    top: 47px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }

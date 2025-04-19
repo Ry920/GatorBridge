@@ -4,16 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "check": "node -c server/index.js"
+    "start": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "express": "^4.21.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  }
+  "type": "commonjs"
 }
