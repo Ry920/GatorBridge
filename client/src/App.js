@@ -30,6 +30,7 @@ function App() {
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem('token', data.user.token);
+      localStorage.setItem('email', data.user.email);
       navigate("/home");
     }
     else {
@@ -48,6 +49,7 @@ function App() {
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem('token', data.user.token);
+      localStorage.setItem('email', data.user.email);
       navigate("/home");
     }
     else {
