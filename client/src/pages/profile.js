@@ -2,9 +2,11 @@ import React, { useEffect } from "react"
 import "./profile.css"
 import pfp from "../R.jpg"
 import Popup from "./editPopup.js"
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 function Profile(){
+    const {email} = useParams();
+    console.log("email:::", email);
     const [username, setUsername] = React.useState("");
     const [toEdit, settoEdit] = React.useState(false);
     const [onHover, setOnHover] = React.useState(false);
@@ -14,13 +16,15 @@ function Profile(){
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({email})
         };
         const response = await fetch("/biography", requestOptions);
         console.log("Response status:", response.status);
         if (response.ok) {
             const desc = await response.json();
-            console.log(desc[0].biography);
+            console.log(desc);
             setDescriptionText(desc[0].biography);
+            
         }
         else {
             alert("Error fetching biography");
@@ -30,6 +34,7 @@ function Profile(){
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({email})
         };
         const response = await fetch("/userSetDef", requestOptions);
         console.log("Response status:", response.status);
@@ -41,9 +46,11 @@ function Profile(){
         }
     }    
     const handleUsernameCheck = async (event) => {
+        console.log("on user check", email);
         const requestOptions = {
             method: "POST",
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({email})
         };
         const response = await fetch("/usernameCheckDefault", requestOptions);
         console.log("Response status:", response.status);
@@ -51,9 +58,11 @@ function Profile(){
             const data = await response.json();
             if (data.userNull){
                 await handleUserSetDef();
+                console.log("data was null")
             }
             else{
                 await handleUsernameFetch();
+                console.log("data was not null")
             }
         }
         else {
@@ -64,13 +73,15 @@ function Profile(){
         // event.preventDefault();
         const requestOptions = {
             method: "POST",
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify({email})
         };
+        console.log("handling fetch")
         const response = await fetch("/username", requestOptions);
         console.log("Response status:", response.status);
         if (response.ok) {
             const user = await response.json();
-            console.log(user[0].username);
+            console.log(user);
             setUsername(user[0].username);
         }
         else {

@@ -108,8 +108,8 @@ function Home() {
         <button type="submit"
            onClick = {(e) => {localStorage.removeItem("token"); navigate("/*")}}
            className = "Home-logout-button" >Log Out</button>
-
-        <Link to ="/profile">
+        {/* {insert dynamic value after /profile for email to go to} */}
+        <Link to ="/profile/will@ufl.edu">
         <button type="submit"
            className = "Home-profile-button">Profile</button>
         </Link>
