@@ -296,6 +296,44 @@ app.post("/verifytoken", authenticate, (req, res) => {
   });
 });
 
+app.post('/userpost', authenticate, (req, res) => {
+  const postText = req.body.postText;
+  const userEmail = req.user.email;
+
+  connection.query(
+    "INSERT INTO Posts (PostText, UserEmail) VALUES (?, ?)",
+    [postText, userEmail],
+    (err, result) => {
+      if (err) {
+        console.error("Post insert error:", err.stack);
+        return res.status(500).json({
+          message: "Error saving post"
+        });
+      }
+      return res.status(200).json({
+        message: "Posted successfully"
+      });
+    }
+  );
+});
+app.post("/search", (req, res) => {
+  const searchText = req.body.searchText;
+
+  connection.query(
+    `SELECT * FROM Posts WHERE PostText LIKE ?`,
+    [`%${searchText}%`],
+    (err, result) => {
+      if (err) {
+        console.error("Search error:", err.stack);
+        return res.status(500).json({
+          message: "Server error."
+        });
+      }
+      return res.status(200).json(result);
+    }
+  );
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
