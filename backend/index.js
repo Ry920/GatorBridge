@@ -272,6 +272,23 @@ app.post("/biographyChange", authenticate,(req, res) => {
   })
 });
 
+app.post("/userSetOwnProf", authenticate, (req, res) => {
+  const userEmail = req.user.email;
+  const profEmail = req.body.email;
+  if (userEmail === profEmail){
+    res.status(200).json({selfProf: true})
+    console.log("true");
+    console.log("userem", userEmail)
+    console.log("profem", profEmail)
+  }
+  else{
+    res.status(200).json({selfProf:false})
+    console.log("false");
+    console.log("userem", userEmail)
+    console.log("profem", profEmail)
+  }
+})
+
 app.post("/verifytoken", authenticate, (req, res) => {
   res.status(200).json({
     message: "Verified",
