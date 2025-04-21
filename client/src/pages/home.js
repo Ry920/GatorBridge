@@ -64,6 +64,15 @@ function Home() {
             <div className = "Home-message-content">
                 {post.PostText}
             </div>
+            <div className = "Home-message-vote-counter">
+              <button onClick = {handleUpVote} className = "Home-message-upvote" >
+              </button>
+              <button onClick = {handleDownVote} className = "Home-message-downvote">
+              </button>
+              <div className = "Home-message-display-counter">
+                {voteCount}
+              </div>
+            </div>
           </header>
         );
       })}
@@ -72,34 +81,33 @@ function Home() {
   }
   const defaultList = () => {
     return (
-      <header className = "Home-message-layout">
-        <header className = "Home-message-row-container">
-          <div className = "Home-message-title">
-            {/* post.title */}
-            title
+      <header className = "Home-display-messages-container">
+        <header className = "Home-message-layout">
+          <header className = "Home-message-row-container">
+            <div className = "Home-message-title">
+              {/* post.title */}
+              title
+            </div>
+            <div className = "Home-message-author">
+              {/* post.author */}
+              author
+            </div>
+          </header>
+          <div className = "Home-message-content">
+              {/* post.content */}
+              message content
           </div>
-          <div className = "Home-message-author">
-            {/* post.author */}
-            author
+          <div className = "Home-message-vote-counter">
+            <button onClick = {handleUpVote} className = "Home-message-upvote" >
+            </button>
+            <button onClick = {handleDownVote} className = "Home-message-downvote">
+            </button>
+            <div className = "Home-message-display-counter">
+              {voteCount}
+            </div>
           </div>
         </header>
-        <div className = "Home-message-content">
-            {/* post.content */}
-            message content
-        </div>
-        <div className = "Home-message-vote-counter">
-          <button onClick = {handleUpVote} className = "Home-message-upvote" >
-          </button>
-          <button onClick = {handleDownVote} className = "Home-message-downvote">
-          </button>
-          <div className = "Home-message-display-counter">
-            {voteCount}
-          </div>
-        </div>
       </header>
-      
-
-
     );
   }
   const handleCreatePostClick = () => {
@@ -146,7 +154,7 @@ function Home() {
 
           
 
-          <header className = "Home-display-messages-container">
+          <header>
             {searched ? listSearch() : defaultList()}
           </header>
 
