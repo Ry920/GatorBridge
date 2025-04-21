@@ -3,6 +3,7 @@ import './editPopupHome.css'
 
 function Popup(props){
     const [postText, setPostText] = React.useState("");
+    const [postTitle, setPostTitle] = React.useState("");
     const [textSize, setTextSize] = React.useState(255);
     const [onHoverX, setOnHoverX] = React.useState(false);
     const [onHoverSave, setOnHoverSave] = React.useState(false);
@@ -27,13 +28,17 @@ function Popup(props){
         event.preventDefault();
         if (textSize < 0) return;
         const requestOptions = {
-          method: "6",
+          method: "POST",
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-          body: JSON.stringify({ postText })
+          body: JSON.stringify({
+            postTitle: postTitle,
+            postText: postText,
+            email: localStorage.getItem('email')
+          })
         };
         const response = await fetch('/userpost', requestOptions);
         if (!response.ok) {
-          alert('Error posting');
+          alert(response.status);
         }
         else {
           alert('Posted!');
@@ -52,7 +57,7 @@ return(props.trigger) ? (
                 {props.children}
                 <div className="Title-edit-section">
                     <form className="Edit-username-form">
-                            <input type="text" name="Edit-name" placeholder="Title of Post" className="Title"></input>
+                            <input type="text" name="Edit-name" placeholder="Title of Post" className="Title" onChange={(e) => {setPostTitle(e.target.value)}}></input>
                     </form>
                 </div>
                 <div className="Description-edit-section">

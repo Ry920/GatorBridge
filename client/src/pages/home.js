@@ -12,9 +12,13 @@ function Home() {
   const navigate = useNavigate();
   const email = localStorage.getItem('email');
   const selfProfileLink = `/profile/${email}`
+  const [searched, setSearched] = useState(false);
   const handleSearch = async (event) => {
     event.preventDefault();
-    if (searchText.length === 0) return;
+    if (searchText.length === 0) {
+      setSearched(false);
+      return;
+    };
     const requestOptions = {
       method: "POST",
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
@@ -24,7 +28,7 @@ function Home() {
     if (response.ok) {
       const searchResults = await response.json();
       setPosts(searchResults);
-      listSearch();
+      setSearched(true);
     }
     else {
       alert("Error searching");
@@ -49,14 +53,16 @@ function Home() {
           <header className = "Home-message-layout">
             <header className = "Home-message-row-container">
               <div className = "Home-message-title">
-                {/* post.title */}
+                {post.PostTitle}
               </div>
-              <div className = "Home-message-author">
-                {/* post.author */}
-              </div>
+              <Link to={`/profile/${post.email}`}>
+                <div className = "Home-message-author">
+                  {post.username}
+                </div>
+              </Link>
             </header>
             <div className = "Home-message-content">
-                {/* post.content */}
+                {post.PostText}
             </div>
           </header>
         );
@@ -141,7 +147,7 @@ function Home() {
           
 
           <header className = "Home-display-messages-container">
-            {defaultList()}
+            {searched ? listSearch() : defaultList()}
           </header>
 
           </header>

@@ -297,20 +297,21 @@ app.post("/verifytoken", authenticate, (req, res) => {
 });
 
 app.post('/userpost', authenticate, (req, res) => {
+  const postTitle = req.body.postTitle;
   const postText = req.body.postText;
-  const userEmail = req.user.email;
-
+  const userEmail = req.body.email;
+  let username = "";
   connection.query(
-    "INSERT INTO Posts (PostText, UserEmail) VALUES (?, ?)",
-    [postText, userEmail],
-    (err, result) => {
-      if (err) {
-        console.error("Post insert error:", err.stack);
+    "INSERT INTO Posts (PostTitle, PostText, email) VALUES (?, ?, ?)",
+    [postTitle, postText, userEmail],
+    (error, result2) => {
+      if (error) {
+        console.error("Post insert error:", error.stack);
         return res.status(500).json({
           message: "Error saving post"
         });
       }
-      return res.status(200).json({
+      res.status(200).json({
         message: "Posted successfully"
       });
     }
@@ -320,7 +321,7 @@ app.post("/search", (req, res) => {
   const searchText = req.body.searchText;
 
   connection.query(
-    `SELECT * FROM Posts WHERE PostText LIKE ?`,
+    `SELECT username, posts.* FROM Posts JOIN users ON users.email = posts.email WHERE PostText LIKE ?`,
     [`%${searchText}%`],
     (err, result) => {
       if (err) {
