@@ -10,7 +10,8 @@ function Home() {
   const [posts, setPosts] = React.useState([]);
   const [voteCount, setVoteCount] = useState(0);
   const navigate = useNavigate();
-
+  const email = localStorage.getItem('email');
+  const selfProfileLink = `/profile/${email}`
   const handleSearch = async (event) => {
     event.preventDefault();
     if (searchText.length === 0) return;
@@ -106,10 +107,10 @@ function Home() {
 
         {/* !!! onclick = {Logout Functionality} !!!*/}
         <button type="submit"
-           onClick = {(e) => {localStorage.removeItem("token"); navigate("/*")}}
+           onClick = {(e) => {localStorage.removeItem("token"); localStorage.removeItem('email'); navigate("/*")}}
            className = "Home-logout-button" >Log Out</button>
-
-        <Link to ="/profile">
+        {/* {insert dynamic value after /profile for email to go to} */}
+        <Link to = {selfProfileLink}>
         <button type="submit"
            className = "Home-profile-button">Profile</button>
         </Link>
