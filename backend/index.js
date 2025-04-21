@@ -296,9 +296,62 @@ app.post("/verifytoken", authenticate, (req, res) => {
   });
 });
 
+app.post('/userpost', authenticate, (req, res) => {
+  const postTitle = req.body.postTitle;
+  const postText = req.body.postText;
+  const userEmail = req.body.email;
+  let username = "";
+  connection.query(
+    "INSERT INTO Posts (PostTitle, PostText, email) VALUES (?, ?, ?)",
+    [postTitle, postText, userEmail],
+    (error, result2) => {
+      if (error) {
+        console.error("Post insert error:", error.stack);
+        return res.status(500).json({
+          message: "Error saving post"
+        });
+      }
+      res.status(200).json({
+        message: "Posted successfully"
+      });
+    }
+  );
+});
+app.post("/search", (req, res) => {
+  const searchText = req.body.searchText;
+
+  connection.query(
+    `SELECT username, posts.* FROM Posts JOIN users ON users.email = posts.email WHERE PostText LIKE ?`,
+    [`%${searchText}%`],
+    (err, result) => {
+      if (err) {
+        console.error("Search error:", err.stack);
+        return res.status(500).json({
+          message: "Server error."
+        });
+      }
+      return res.status(200).json(result);
+    }
+  );
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
+  connection.query("CREATE TABLE IF NOT EXISTS users (firstname varchar(255), lastname varchar(255), email varchar(255),\
+    password varchar(255), biography varchar(255), username varchar(255), PRIMARY KEY (email))", (err, res) => {
+      if (err) {
+        console.error(err.stack);
+        process.exit(1);
+      }
+    });
+  connection.query("CREATE TABLE IF NOT EXISTS posts (PostTitle varchar(255), PostText varchar(255), email varchar(255),\
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (email) REFERENCES users(email))", (err, res) => {
+      if (err) {
+        console.error(err.stack);
+        process.exit(1);
+      }
+    });
 });
 
 module.exports = app;
