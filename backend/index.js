@@ -338,6 +338,20 @@ app.post("/search", (req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
+  connection.query("CREATE TABLE IF NOT EXISTS users (firstname varchar(255), lastname varchar(255), email varchar(255),\
+    password varchar(255), biography varchar(255), username varchar(255), PRIMARY KEY (email))", (err, res) => {
+      if (err) {
+        console.error(err.stack);
+        process.exit(1);
+      }
+    });
+  connection.query("CREATE TABLE IF NOT EXISTS posts (PostTitle varchar(255), PostText varchar(255), email varchar(255),\
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (email) REFERENCES users(email))", (err, res) => {
+      if (err) {
+        console.error(err.stack);
+        process.exit(1);
+      }
+    });
 });
 
 module.exports = app;
