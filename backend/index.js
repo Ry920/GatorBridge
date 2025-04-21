@@ -150,8 +150,12 @@ app.post("/signup", (req, res) => {
 });
 app.post("/usernameCheckDefault", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
-  const userEmail = req.user.email;
+  const userEmail = req.body.email;
+  console.log("check def log2", userEmail)
   connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
+    console.log('1',result[0].username)
+    console.log('2',result[0])
+    console.log('3',result)
     if (err) {
       console.log(err.stack);
       return res.status(500).json({
@@ -168,7 +172,7 @@ app.post("/usernameCheckDefault", authenticate,(req, res) => {
 });
 app.post("/userSetDef", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
-  const userEmail = req.user.email;
+  const userEmail = req.body.email;
   connection.query(`UPDATE users SET username = "${userEmail}" WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -179,10 +183,9 @@ app.post("/userSetDef", authenticate,(req, res) => {
       return res.status(200).json(result);
   });
 });
-
 app.post("/username", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
-  const userEmail = req.user.email;
+  const userEmail = req.body.email;
   connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -193,10 +196,9 @@ app.post("/username", authenticate,(req, res) => {
     return res.status(200).json(result);
   });
 });
-
 app.post("/biography", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
-  const userEmail = req.user.email;
+  const userEmail = req.body.email;
   connection.query(`SELECT biography FROM users WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -221,7 +223,6 @@ app.post("/biography", authenticate,(req, res) => {
     }
 });
 });
-
 app.post("/usernameCheckMultiple", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
   const {userEdit} = req.body;
@@ -242,7 +243,6 @@ app.post("/usernameCheckMultiple", authenticate,(req, res) => {
     return res.status(200).json(result);
   });
 });
-
 app.post("/usernameChange", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
   const {userEdit} = req.body;
@@ -257,7 +257,6 @@ app.post("/usernameChange", authenticate,(req, res) => {
     return res.status(200).json(newUser);
   })
 });
-
 app.post("/biographyChange", authenticate,(req, res) => {
   // const searchText = req.body.searchText;
   const {biographyEdit} = req.body;
@@ -272,6 +271,23 @@ app.post("/biographyChange", authenticate,(req, res) => {
     return res.status(200).json(newBio);
   })
 });
+
+app.post("/userSetOwnProf", authenticate, (req, res) => {
+  const userEmail = req.user.email;
+  const profEmail = req.body.email;
+  if (userEmail === profEmail){
+    res.status(200).json({selfProf: true})
+    console.log("true");
+    console.log("userem", userEmail)
+    console.log("profem", profEmail)
+  }
+  else{
+    res.status(200).json({selfProf:false})
+    console.log("false");
+    console.log("userem", userEmail)
+    console.log("profem", profEmail)
+  }
+})
 
 app.post("/verifytoken", authenticate, (req, res) => {
   res.status(200).json({

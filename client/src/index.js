@@ -17,9 +17,10 @@ const LargeRoute = () => {
           method: "POST",
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         };
-        const response = await fetch('verifytoken', requestOptions);
+        const response = await fetch('/verifytoken', requestOptions);
         if (!response.ok) {
           localStorage.removeItem('token');
+          localStorage.removeItem('email');
           navigate("*");
         }
       }
@@ -54,7 +55,7 @@ root.render(
           <Route path="*" element={<App/>}/>
         </Route>
         <Route element={<ProtectedRoute/>}>
-          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile/:email" element={<Profile/>}/>
           <Route path="/home" element={<Home/>}/>
         </Route>
       </Route>
