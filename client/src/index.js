@@ -20,6 +20,7 @@ const LargeRoute = () => {
         const response = await fetch('/verifytoken', requestOptions);
         if (!response.ok) {
           localStorage.removeItem('token');
+          localStorage.removeItem('email');
           navigate("*");
         }
       }
