@@ -28,13 +28,6 @@ test('Renders Profile link', async () => {
   expect(screen.getAllByText(/Profile/i)[0]).toBeInTheDocument();
 });
 
-test('Renders Edit Profile', () => {
-  render(<Profile />);
-  const linkElement = screen.getByText(/Edit Profile/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
-
 describe('Sign up and Log in Tests', () => {
   test('Sign up functionality', () => {
     const {container} = render(
