@@ -72,6 +72,7 @@ app.post("/login", (req, res) => {
         if (!isMatch) {
           return res.status(401).json({ message: "Invalid email or password" });
         }
+        // Create JWT token for authorization
         const jwtToken = jwt.sign({ email: email }, SECRET_KEY, { expiresIn: '24h' });
         // Login successful
         res.json({
@@ -125,13 +126,14 @@ app.post("/signup", (req, res) => {
 
         // Insert the new user into the database
         connection.query(
-          "INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)",
-          [firstname, lastname, email, hashedPassword],
+          "INSERT INTO users (firstname, lastname, email, password, biography, username) VALUES (?, ?, ?, ?, ?, ?)",
+          [firstname, lastname, email, hashedPassword, "Here to talk all things UF!", firstname + " " + lastname],
           (err, results) => {
             if (err) {
               console.error("Database error:", err);
               return res.status(500).json({ message: "Error saving user" });
             }
+            // Create JWT token for authorization
             const jwtToken = jwt.sign({ email: email }, SECRET_KEY, { expiresIn: '24h' });
             // Respond with a success message
             res.status(201).json({
@@ -149,7 +151,6 @@ app.post("/signup", (req, res) => {
   );
 });
 app.post("/usernameCheckDefault", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const userEmail = req.body.email;
   console.log("check def log2", userEmail)
   connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
@@ -171,7 +172,6 @@ app.post("/usernameCheckDefault", authenticate,(req, res) => {
   });
 });
 app.post("/userSetDef", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const userEmail = req.body.email;
   connection.query(`UPDATE users SET username = "${userEmail}" WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
@@ -184,7 +184,6 @@ app.post("/userSetDef", authenticate,(req, res) => {
   });
 });
 app.post("/username", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const userEmail = req.body.email;
   connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
@@ -197,7 +196,6 @@ app.post("/username", authenticate,(req, res) => {
   });
 });
 app.post("/biography", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const userEmail = req.body.email;
   connection.query(`SELECT biography FROM users WHERE email = "${userEmail}"`, (err, result) => {
     if (err) {
@@ -224,7 +222,6 @@ app.post("/biography", authenticate,(req, res) => {
 });
 });
 app.post("/usernameCheckMultiple", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const {userEdit} = req.body;
   const email = req.user.email;
   if (userEdit === ""){
@@ -244,7 +241,6 @@ app.post("/usernameCheckMultiple", authenticate,(req, res) => {
   });
 });
 app.post("/usernameChange", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const {userEdit} = req.body;
   const email = req.user.email;
   connection.query(`UPDATE users SET username = "${userEdit}" WHERE email = "${email}"`, (err, newUser) => {
@@ -258,7 +254,6 @@ app.post("/usernameChange", authenticate,(req, res) => {
   })
 });
 app.post("/biographyChange", authenticate,(req, res) => {
-  // const searchText = req.body.searchText;
   const {biographyEdit} = req.body;
   const email = req.user.email;
   connection.query(`UPDATE users SET biography = "${biographyEdit}" WHERE email = "${email}"`, (err, newBio) => {
