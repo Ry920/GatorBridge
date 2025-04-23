@@ -19,6 +19,8 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);*/
+
+  // handles sign-up form submission
   const handleSignupSubmit = async (event) => {
     event.preventDefault();
     const requestOptions = {
@@ -38,6 +40,8 @@ function App() {
       // TODO: Display specific errors (server vs client)
     }
   };
+
+  // handles login form submission
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
     const requestOptions = {
@@ -57,6 +61,8 @@ function App() {
       // TODO: Display specific errors (server vs client)
     }
   };
+
+  //input field components for form fields
   function GetFirstName(){
     const handleInput = (event) => {
       setFirstName(event.target.value);
@@ -101,6 +107,8 @@ function App() {
     </label>
     );
   }
+
+  // toggles between login and signup views on button click
   const handleLeftClick = () => {
         setIsClickedLeft(true);
         setIsClickedRight(false);
@@ -110,7 +118,7 @@ function App() {
         setIsClickedRight(true);
         setIsClickedLeft(false);
       };
-  
+  //renders sign up form
   function displaySignUp(){
     return(
         <div className = "App-Signup-Login-Container2">
@@ -151,6 +159,7 @@ function App() {
         </div>
     );
   }
+  // renders login form
   function displayLogin(){
     return(
         <div className = "App-Signup-Login-Container2">
