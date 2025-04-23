@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require("body-parser");
 const authenticate = require("./middleware/authjwt")
 require("dotenv").config(); // To use the environment variables for DB credentials
-
+//Server and Database configurations
 const SECRET_KEY = process.env.JWT_SECRET
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -13,7 +13,7 @@ const DB_PORT = process.env.DB_PORT || 3306;
 
 app.use(bodyParser.json());
 
-//
+
 
 // Set up MySQL database connection
 const connection = mysql.createConnection({
@@ -150,6 +150,7 @@ app.post("/signup", (req, res) => {
     }
   );
 });
+// check default username
 app.post("/usernameCheckDefault", authenticate,(req, res) => {
   const userEmail = req.body.email;
   console.log("check def log2", userEmail)
@@ -164,13 +165,16 @@ app.post("/usernameCheckDefault", authenticate,(req, res) => {
       });
     }
     if (result[0].username != null){
+      // return username that was set
       return res.status(200).json(result);
     }  
     else{
+      // returns null if not set
       return res.status(200).json({userNull: true});
     }
   });
 });
+// set default username to email
 app.post("/userSetDef", authenticate,(req, res) => {
   const userEmail = req.body.email;
   connection.query(`UPDATE users SET username = "${userEmail}" WHERE email = "${userEmail}"`, (err, result) => {
@@ -183,6 +187,7 @@ app.post("/userSetDef", authenticate,(req, res) => {
       return res.status(200).json(result);
   });
 });
+// get username for user
 app.post("/username", authenticate,(req, res) => {
   const userEmail = req.body.email;
   connection.query(`SELECT username FROM users WHERE email = "${userEmail}"`, (err, result) => {
@@ -195,6 +200,7 @@ app.post("/username", authenticate,(req, res) => {
     return res.status(200).json(result);
   });
 });
+// get user biography
 app.post("/biography", authenticate,(req, res) => {
   const userEmail = req.body.email;
   connection.query(`SELECT biography FROM users WHERE email = "${userEmail}"`, (err, result) => {
@@ -221,6 +227,7 @@ app.post("/biography", authenticate,(req, res) => {
     }
 });
 });
+// check if username exists before updating
 app.post("/usernameCheckMultiple", authenticate,(req, res) => {
   const {userEdit} = req.body;
   const email = req.user.email;
@@ -240,6 +247,7 @@ app.post("/usernameCheckMultiple", authenticate,(req, res) => {
     return res.status(200).json(result);
   });
 });
+//change username
 app.post("/usernameChange", authenticate,(req, res) => {
   const {userEdit} = req.body;
   const email = req.user.email;
@@ -253,6 +261,7 @@ app.post("/usernameChange", authenticate,(req, res) => {
     return res.status(200).json(newUser);
   })
 });
+// change biography
 app.post("/biographyChange", authenticate,(req, res) => {
   const {biographyEdit} = req.body;
   const email = req.user.email;
@@ -266,7 +275,7 @@ app.post("/biographyChange", authenticate,(req, res) => {
     return res.status(200).json(newBio);
   })
 });
-
+// check if profile is self-view
 app.post("/userSetOwnProf", authenticate, (req, res) => {
   const userEmail = req.user.email;
   const profEmail = req.body.email;
@@ -283,14 +292,14 @@ app.post("/userSetOwnProf", authenticate, (req, res) => {
     console.log("profem", profEmail)
   }
 })
-
+//verify jwt token
 app.post("/verifytoken", authenticate, (req, res) => {
   res.status(200).json({
     message: "Verified",
     user: req.user
   });
 });
-
+// create a user post
 app.post('/userpost', authenticate, (req, res) => {
   const postTitle = req.body.postTitle;
   const postText = req.body.postText;
@@ -312,6 +321,7 @@ app.post('/userpost', authenticate, (req, res) => {
     }
   );
 });
+// search posts
 app.post("/search", (req, res) => {
   const searchText = req.body.searchText;
 
@@ -333,6 +343,7 @@ app.post("/search", (req, res) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
+  //if users table doesn't exist create table
   connection.query("CREATE TABLE IF NOT EXISTS users (firstname varchar(255), lastname varchar(255), email varchar(255),\
     password varchar(255), biography varchar(255), username varchar(255), PRIMARY KEY (email))", (err, res) => {
       if (err) {
@@ -340,6 +351,7 @@ app.listen(PORT, () => {
         process.exit(1);
       }
     });
+    // if posts table doesn't exist create table
   connection.query("CREATE TABLE IF NOT EXISTS posts (PostTitle varchar(255), PostText varchar(255), email varchar(255),\
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (email) REFERENCES users(email))", (err, res) => {
       if (err) {
