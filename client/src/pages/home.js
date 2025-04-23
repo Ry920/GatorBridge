@@ -13,9 +13,12 @@ function Home() {
   const email = localStorage.getItem('email');
   const selfProfileLink = `/profile/${email}`
   const [searched, setSearched] = useState(false);
+
+  // handles search functionality 
   const handleSearch = async (event) => {
     event.preventDefault();
     if (searchText.length === 0) {
+      //prevent search if input is empty
       setSearched(false);
       return;
     };
@@ -45,6 +48,7 @@ function Home() {
     setVoteCount(voteCount - 1);
   }
 
+  // displays search result posts
   const listSearch = () =>{
     return(
     <header className = "Home-display-messages-container">
@@ -79,6 +83,8 @@ function Home() {
       </header>
     );
   }
+
+  // displays default sample post content before search
   const defaultList = () => {
     return (
       <header className = "Home-display-messages-container">
@@ -110,6 +116,7 @@ function Home() {
       </header>
     );
   }
+  //opense create post popup
   const handleCreatePostClick = () => {
     settoEdit(true);
     console.log('clicked ?', toEdit);
