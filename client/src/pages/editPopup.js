@@ -8,39 +8,48 @@ function Popup(props){
     const [toEdit, settoEdit] = React.useState(true);
     const [userEdit, setUserEdit] = React.useState("");
     const [biographyEdit, setBiographyEdit] = React.useState("");
-
+    //sets hover on x out to true
     const handleHoverX = () => {
         setOnHoverX(true);
     };
+    //sets hover on x out to false
     const handleNotHoverX = () => {
         setOnHoverX(false);
     };
+    //sets hover on save to true
     const handleHoverSave = () => {
         setOnHoverSave(true);
     };
+    //sets hover on save to false
     const handleNotHoverSave = () => {
         setOnHoverSave(false);
     };
+    //removes any saved text from biography section
     const handleBioClear = () => {
         setBiographyEdit("");
     }
+    //removes any saved text from username section
     const handleUserClear = () => {
         setUserEdit("");
     }
+    //sets edit variable to false
     const handleClickOut = () => {
         settoEdit(false);
         console.log('clicked ?', toEdit)
     }
+    //changes userEdit variable to whatever is typed
     const handleUserEdit = (event) => {
         setUserEdit(event.target.value);
         console.log('new name', userEdit);
 
     }
+    //changes biographyEdit variable to whatever is typed
     const handleBioEdit = (event) => {
         setBiographyEdit(event.target.value);
         console.log('new bio', biographyEdit);
 
     }
+    //checks whether new chose username is already taken, if not goes to change it
     const handleUsernameCheck = async (event) => {
         const requestOptions = {
             method: "POST",
@@ -56,6 +65,7 @@ function Popup(props){
             alert("Error changing usernameCheck");
         }
     }
+    //changes username 
     const handleUsernameChange = async (event) => {
         const requestOptions = {
             method: "POST",
@@ -72,6 +82,7 @@ function Popup(props){
             alert("Error changing usernameChange");
         }
     }
+    //changes biography
     const handleBioChange = async (event) => {
         const requestOptions = {
             method: "POST",
@@ -88,6 +99,7 @@ function Popup(props){
             alert("Error changing bioChange");
         }
     }
+    //whenever the prop is triggered to true it resets the variables
     useEffect(() => {
         handleBioClear();
         handleUserClear();
