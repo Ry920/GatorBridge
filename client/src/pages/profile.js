@@ -13,6 +13,7 @@ function Profile(){
     const [onHover, setOnHover] = React.useState(false);
     const [ownProfile, setOwnProfile] = React.useState(false);
     const [descriptionText, setDescriptionText] = React.useState("");
+    // fetches biography text from server
     const handleDescriptionFetch = async (event) => {
         // event.preventDefault();
         const requestOptions = {
@@ -32,6 +33,7 @@ function Profile(){
             alert("Error fetching biography");
         }
         }
+    // sets state if logged-in user is viewing their own profile
     const handleSetUserProf = async() =>{
         const requestOptions = {
             method: "POST",
@@ -54,6 +56,7 @@ function Profile(){
             alert("Error changing usernameCheck");
         }
     }
+    // sets default username if it hasn't been set yet
     const handleUserSetDef = async (event) =>{
         const requestOptions = {
             method: "POST",
@@ -69,6 +72,7 @@ function Profile(){
             alert("Error setting default username");
         }
     }    
+    // checks if user has a username set
     const handleUsernameCheck = async (event) => {
         console.log("on user check", email);
         const requestOptions = {
@@ -93,6 +97,7 @@ function Profile(){
             alert("Error changing usernameCheck");
         }
     }    
+    // fetches username from backend
     const handleUsernameFetch = async (event) => {
         // event.preventDefault();
         const requestOptions = {
@@ -112,6 +117,7 @@ function Profile(){
             alert("Error fetching username");
         }
         }
+    // renders buttons 
     function HandleButton(ownProfile){
         console.log("in handle button");
         if (ownProfile === true){
@@ -142,17 +148,19 @@ function Profile(){
             )
         }
     }
+    // handles hover for edit/follow button
     const handleHover = () => {
         setOnHover(true);
     };
     const handleNotHover = () => {
         setOnHover(false);
     };
+    // toggles the edit popup
     const handleEditClick = () => {
         settoEdit(true);
         console.log('clicked ?', toEdit);
     };
-
+    // fetch profile data 
     useEffect(() => {
         handleUsernameCheck();
         handleDescriptionFetch();
@@ -202,4 +210,4 @@ function Profile(){
     );
 }
 
-export default Profile
+export default Profile;
